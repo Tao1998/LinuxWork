@@ -3,14 +3,8 @@ start_time=`date +%s` #定义脚本运行的开始时间
 echo "检查同一网段ip地址是否网络联通" 
 
 # 获取IP和子网掩码
-#myip=`ifconfig | grep ^en -A9 | grep inet -w | awk '{print $2}'`
-#mask=`ifconfig | grep ^en -A9 | grep inet -w | awk '{print $4}'`
-#myip=`ifconfig | grep ^wl -A9 | grep inet -w | awk '{print $2}'`
-#mask=`ifconfig | grep ^wl -A9 | grep inet -w | awk '{print $4}'`
-
 myip=(`ifconfig | grep broadcast -wC0 | grep inet -w | awk '{print $2}' | grep -Eo "[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]" | awk '{print $1}'`)
 mask=(`ifconfig | grep broadcast -wC0 | grep inet -w | awk '{print $4}' | grep -Eo "[0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5]" | awk '{print $1}'`)
-
 
 echo "myip = "${myip[0]}.${myip[1]}.${myip[2]}.${myip[3]}
 echo "mask = "${mask[0]}.${mask[1]}.${mask[2]}.${mask[3]}
