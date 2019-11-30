@@ -21,7 +21,7 @@
 5.	**根据maskneq255对同一网段中的ip使用ping测试，这一过程使用有名管道和多线程进行加速**
 	1.	当maskneq255=2时，同一网段的ip为subnet[0].subnet[1].subnet[2].1到subnet[0].subet[1].subnet[2]+255-mask[2].254（跳过广播地址）
 	    * 如，ip为10.132.6.127，mask为255.255.128.0，subnet为10.132.0.0，需要ping的IP为10.132.0.1~10.132.127.254
-    2.	当maskneq255=3时，同一网段的ip为subnet[0].subnet[1].subnet[2].subnet[3]到subnet[0].subet[1].subnet[2].subnet[3]+255-mask[3]-1（跳过广播地址）
+    2.	当maskneq255=3时，同一网段的ip为subnet[0].subnet[1].subnet[2].subnet[3]+1到subnet[0].subet[1].subnet[2].subnet[3]+255-mask[3]-1（跳过广播地址）
 	    * 如，ip为10.132.6.130，mask为255.255.255.128，subnet为10.132.6.128，需要ping的IP为10.132.6.129~10.132.6.254
     3. 每个ip 进行3次ping，使用awk计算平均响应时间，如果连通则将ip和平均响应时间重定向到connected.txt，如果不连通则将ip重定向到disconnected.txt
 6.	**使用sort对connected.txt进行排序，按照平均响应时间升序排列并重定向到connectedSortByTime**
